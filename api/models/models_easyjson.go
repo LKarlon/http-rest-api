@@ -17,7 +17,80 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(in *jlexer.Lexer, out *INNInfo) {
+func easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(in *jlexer.Lexer, out *INNReady) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "passport":
+			out.Passport = string(in.String())
+		case "inn":
+			out.Inn = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(out *jwriter.Writer, in INNReady) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"passport\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.Passport))
+	}
+	{
+		const prefix string = ",\"inn\":"
+		out.RawString(prefix)
+		out.String(string(in.Inn))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v INNReady) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v INNReady) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *INNReady) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *INNReady) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(l, v)
+}
+func easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels1(in *jlexer.Lexer, out *INNInfo) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -44,12 +117,8 @@ func easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(in *jlexer.Le
 			out.Otch = string(in.String())
 		case "bdate":
 			out.Bdate = string(in.String())
-		case "doctype":
-			out.Doctype = string(in.String())
 		case "docno":
 			out.Docno = string(in.String())
-		case "c":
-			out.C = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -60,7 +129,7 @@ func easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(in *jlexer.Le
 		in.Consumed()
 	}
 }
-func easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(out *jwriter.Writer, in INNInfo) {
+func easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels1(out *jwriter.Writer, in INNInfo) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -85,19 +154,9 @@ func easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(out *jwriter.
 		out.String(string(in.Bdate))
 	}
 	{
-		const prefix string = ",\"doctype\":"
-		out.RawString(prefix)
-		out.String(string(in.Doctype))
-	}
-	{
 		const prefix string = ",\"docno\":"
 		out.RawString(prefix)
 		out.String(string(in.Docno))
-	}
-	{
-		const prefix string = ",\"c\":"
-		out.RawString(prefix)
-		out.String(string(in.C))
 	}
 	out.RawByte('}')
 }
@@ -105,23 +164,23 @@ func easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(out *jwriter.
 // MarshalJSON supports json.Marshaler interface
 func (v INNInfo) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(&w, v)
+	easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v INNInfo) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels(w, v)
+	easyjsonD2b7633eEncodeGithubComLKarlonHttpRestApiGitApiModels1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *INNInfo) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(&r, v)
+	easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *INNInfo) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels(l, v)
+	easyjsonD2b7633eDecodeGithubComLKarlonHttpRestApiGitApiModels1(l, v)
 }
