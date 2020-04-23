@@ -110,9 +110,6 @@ func (s *APIServer) Worker() {
 
 // INN берет данные из DataForProcessing и отправляет ответ клиенту
 func (s *APIServer) INN(w http.ResponseWriter, r *http.Request) {
-	fmt.Print(s.DataForProcessing)
-	fmt.Println(" - INN START")
-	fmt.Println(s.readyData)
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Fatalln(err)
@@ -135,9 +132,6 @@ func (s *APIServer) INN(w http.ResponseWriter, r *http.Request) {
 			s.DataForProcessing = append(s.DataForProcessing, value) 	//добавляем в данные для обработки
 		}
 	}
-	fmt.Print(s.DataForProcessing)
-	fmt.Println(" - INN END")
-
 	err = json.NewEncoder(w).Encode(&resp)
 	if err != nil {
 		log.Fatalln(err)
